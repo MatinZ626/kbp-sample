@@ -1,7 +1,8 @@
-#  Kubernetes Best Practices (2nd Edition)
-This is the repository for "Kubernetes Best Practices, 2nd Edition".
+# Kubernetes Best Practices (2nd Edition) 
 
-*It is currently under construction, content will be added over coming months*
+## Description
+I add full Chapter1 k8s config that not exist in main repo.
 
-## Contents
-* [example-app](./example-app/) - An example application for deploying to Kubernetes.
+## Some Notes
+in chapter 1 you need a pv for creating pvc that not written in the book so i recommend you to read https://github.com/rancher/local-path-provisioner if you wanna  run pv on single worker node
+
