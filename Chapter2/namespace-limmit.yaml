@@ -1,0 +1,15 @@
+# it will set hardware limit on the name space
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: limit-compute
+  namespace: my-namespace
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: 1G
+    # if you set 1G it means 1000MB and if you set it 1Gi it means 1024MB
+    # Requests  hardware is amount of hardware that you allocate to the namespace 
+    limits.cpu: "3"
+    limits.memory: 3G
+    # limits will use when needed 
