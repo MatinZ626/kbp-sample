@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: mysql-config
+  namespace: shared-config
+data: 
+  mysqldb: myappdb1
+  user: mysqluser1

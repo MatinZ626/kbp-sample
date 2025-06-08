@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-http-config
+  namespace: shared-config
+data:
+  config: |
+    events {}
+
+    http {
+      server {
+        listen 80;
+        server_name localhost;
+
+        root /usr/share/nginx/html;
+        index index.html;
+
+        location / {
+          try_files $uri $uri/ =404;
+        }
+      }
+    }

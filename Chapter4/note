@@ -1,0 +1,6 @@
+first run:
+kubectl create namespace shared-config 
+
+The nginx files show you how ConfigMap with embedded file content works  and the example is diffrent from book.
+
+Add chapter4.nginx.local to /etc/hosts

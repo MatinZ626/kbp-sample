@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: myapp-db-deploy
+  namespace: shared-config
+spec:
+  selector:
+    matchLables:
+      app: myapp-db 
+  template: 
+    metadata: 
+      labels: 
+        app: myapp-db
+spec:
+  containers:
+  - name: myapp-db-instance
+    image: mysql 
+    resources: 
+      limits:
+        memory: "256Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 3306
+    env:
+      - name: MYSQL_ROOT_PASSWORD
+        valueFrom: 
+          secretKeyRef:
+            name: mysql-secret
+            key: rootpassword
+      - name:
+        valueFrom:
+          secretKeyRef:
+            name: mysql-secret
+            key: userpassword
+      - name: MYSQL_USER
+        valueFrom:
+          configMapKeyRef:
+            name: mysql-config
+            key: user
+      - name: MYSQL_DB
+        valueFrom:
+            configMapKeyRef:
+              name: mysql-config
+              key: mysqldb
+              
+                  

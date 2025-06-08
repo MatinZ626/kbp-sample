@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-custom
+  namespace: shared-config
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-custom
+  template:
+    metadata:
+      labels:
+        app: nginx-custom
+    spec:                         
+      containers:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config-volume
+              mountPath: /etc/nginx/sites-available
+              subPath: default
+            - name: html-volume
+              mountPath: /usr/share/nginx/html/index.html
+              subPath: index.html
+      volumes:                    
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-http-config
+        - name: html-volume
+          configMap:
+            name: custom-index-html
+
+

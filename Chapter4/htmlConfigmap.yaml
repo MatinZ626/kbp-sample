@@ -1,0 +1,15 @@
+apiVersion: v1 
+kind: ConfigMap
+metadata:
+  name: custom-index-html
+  namespace: shared-config
+data:
+  index.html: | 
+    <html>
+    <head><title>custome page</title></head>
+    <body>
+      <h1>Welcome to the custompage</h1>
+      <p> I create this page by using customMap with direct value or better to say Inline ConfigMap with embedded file content</p>
+    </body>
+    </html>
+
