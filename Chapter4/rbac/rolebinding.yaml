@@ -1,0 +1,14 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: test-users
+  namespace: shared-config
+subjects:
+- kind: User
+  name: testuser@k8s.local
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role 
+  name: pod-viewer
+  apiGroup: rbac.authorization.k8s.io
+  
