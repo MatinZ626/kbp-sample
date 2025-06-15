@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      volumes:
+      - name: redis-passwd
+        secret:
+          secretName: redis-passwd
+
+      containers:
+      - name: frontend
+        image: matinz626/journal-server:v1-abcde
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: redis-passwd
+          readOnly: true
+          mountPath: "/etc/redis-passwd"
+        env:
+        - name: JOURNAL_ENTRIES
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: journalEntries
+        resources:
+          requests:
+            cpu: "1.0"
+            memory: "1G"
+          limits:
+            cpu: "1.0"
+            memory: "1G"
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
